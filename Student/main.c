@@ -18,10 +18,10 @@ int main()
     switch (modeChoice)
     {
     case 1:
-        adminMode();
+        Admin_Mode();
         break;
     case 2:
-        studentMode();
+        Student_Mode();
         break;
     default:
         printf("Invalid mode choice. Exiting...\n");
