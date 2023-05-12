@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "admin.h"
-#include "student.h"
+#include "Admin.h"
+#include "Student.h"
 
 int main()
 {
