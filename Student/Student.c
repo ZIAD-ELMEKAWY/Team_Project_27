@@ -4,6 +4,14 @@
 #include "Student.h"
 #include <windows.h>
 
+/**
+* @file     Student.c
+* @version  20.03
+* @brief    Student Module
+* @details  This file contains the student module Source code
+* @Author   Ziad_Elmekawy
+**/
+
 void Student_Mode()
 {
     if (1== Student_Login_Check(1,1))
