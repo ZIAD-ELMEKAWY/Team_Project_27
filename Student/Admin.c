@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "list.h"
-#include "admin.h"
+#include "Admin.h"
 
 #define MAX_PASSWORD_LENGTH 30
 #define MAX_PASSWORD_ATTEMPTS 3
@@ -18,9 +18,9 @@ static const char DEFAULT_PASSWORD[] = "1234";
 
 char adminPassword[MAX_PASSWORD_LENGTH];
 
-void adminMode()
+void Admin_Mode()
 {
-    if (validateAdminPassword())
+    if (Validate_Admin_Password())
     {
         int adminChoice;
 
@@ -39,22 +39,22 @@ void adminMode()
         switch (adminChoice)
         {
         case 1:
-            addStudentRecord();
+            Add_Student_Record();
             break;
         case 2:
-            removeStudentRecord();
+            Remove_StudentR_ecord();
             break;
         case 3:
-            viewStudentRecord();
+            View_Student_Record();
             break;
         case 4:
-            viewAllRecords();
+            View_All_Records();
             break;
         case 5:
-            editAdminPassword();
+            Edit_Admin_Password();
             break;
         case 6:
-            editStudentGrade();
+            Edit_Student_Grade();
             break;
         default:
             printf("Invalid option. Exiting admin mode...\n");
@@ -67,7 +67,7 @@ void adminMode()
     }
 }
 
-int validateAdminPassword()
+int Validate_Admin_Password()
 {
     char adminPassword[MAX_PASSWORD_LENGTH];
     int attempts = 0;
