@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "list.h"
+#include "./List/List.h"
 #include "admin.h"
 
 #define MAX_PASSWORD_LENGTH 30
@@ -54,33 +54,38 @@ void Edit_Admin_Password()
 
 void Add_Student_Record()
 {
-    Student student;
+    char *studunt_name;
+    int total_grade;
+    int student_ID;
+    int student_age;
+    char *gender;
+    char *student_password;
 
     printf("Enter student name: ");
-    fgets(student.name, sizeof(student.name), stdin);
-    student.name[strcspn(student.name, "\n")] = '\0'; // Remove trailing newline
+    fgets(studunt_name, sizeof(studunt_name), stdin);
+    studunt_name[strcspn(studunt_name, "\n")] = '\0'; // Remove trailing newline
 
     printf("Enter total grade: ");
-    scanf("%d", &student.totalGrade);
+    scanf("%d", &total_grade);
     getchar(); // Consume newline character
 
     printf("Enter unique ID: ");
-    scanf("%d", &student.uniqueId);
+    scanf("%d", &student_ID);
     getchar(); // Consume newline character
 
     printf("Enter age: ");
-    scanf("%d", &student.age);
+    scanf("%d", &student_age);
     getchar(); // Consume newline character
 
     printf("Enter gender (M/F): ");
-    scanf("%c", &student.gender);
-    getchar(); // Consume newline character
+    fgets(gender, sizeof(gender), stdin);
+    gender[strcspn(gender, "\n")] = '\0';
 
     printf("Enter password: ");
-    fgets(student.password, sizeof(student.password), stdin);
-    student.password[strcspn(student.password, "\n")] = '\0'; // Remove trailing newline
+    fgets(student_password, sizeof(student_password), stdin);
+    student_password[strcspn(student_password, "\n")] = '\0'; // Remove trailing newline
 
-    // insertNode(student);
+    Add_student_record(studunt_name, total_grade, student_ID, student_age, gender, student_password);
 
     printf("Student record added successfully.\n");
 }
@@ -91,7 +96,7 @@ void Remove_Student_Record()
     scanf("%d", &studentId);
     getchar(); // Consume newline character
 
-    // deleteNode(studentId);
+    delete_Record(studentId);
 }
 void View_Student_Record()
 {
@@ -99,20 +104,11 @@ void View_Student_Record()
     printf("Enter student ID to view: ");
     scanf("%d", &studentId);
     getchar(); // Consume newline character
-
-    Node *studentRecord = // findNode(studentId);
-        if (studentRecord != NULL)
-    {
-        // displayNode(studentRecord);
-    }
-    else
-    {
-        printf("Student with ID %d not found.\n", studentId);
-    }
+    display_Syudent_Record(studentId);
 }
 void View_All_Records()
 {
-    // displayAllNodes();
+    displayAllRecord();
 }
 void Edit_Student_Grade()
 {
@@ -125,5 +121,5 @@ void Edit_Student_Grade()
     scanf("%d", &newGrade);
     getchar(); // Consume newline character
 
-    // editStudentGradeById(studentId, newGrade);
+    editStudentGradeById(studentId, newGrade);
 }
