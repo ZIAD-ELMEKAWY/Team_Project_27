@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-#include "Student.h"
 #include "List.h"
+#include "Admin.h"
+#include "Student.h"
 /**
 * @file     Student.c
 * @version  20.03
@@ -12,24 +13,25 @@
 * @Author   Ziad_Elmekawy
 **/
 
+static char StuPassword[MAX_PASSWORD_LENGTH] = "1234";        // for edit name function
+static char StuName[MAX_PASSWORD_LENGTH] = "Ziad Elmekawy" ;  // for edit password function
+static char StuPass[MAX_PASSWORD_LENGTH] = "abc123" ;  // for student login function
 
-void Student_Mode()
+
+int  Student_Login_Check(void)
 {
-    if (1== Student_Login_Check(1,1))
-    {
-
-    }
-    else
-    {
-        printf("Invalid password. Exiting student mode...\n");
-    }
-}
-
-int  Student_Login_Check(int Student_ID, char* Student_Passowrd)
-{
+    char *Student_Password = (char*) malloc(strlen(StuPass)+1);
     int status =0;
 
-    if ((isIDExist(Student_ID) == 1) && (isIDExist(Student_Passowrd) == 1))  //Modification : there is no function for Check Student Password
+    printf("Enter your ID : ");
+    scanf ("%d", &StudentId);
+    printf("Enter your Password: ");
+    fgets(Student_Password, MAX_PASSWORD_LENGTH , stdin);
+    Student_Password[strcspn(Student_Password, "\n")] = '\0';
+    strncpy(StuPass , Student_Password , MAX_PASSWORD_LENGTH);
+
+
+    if ( isIDExist(StudentId , Student_Password ) == 1 )
     {
         status = 1;
     }
@@ -42,32 +44,39 @@ int  Student_Login_Check(int Student_ID, char* Student_Passowrd)
 }
 
 
-void Student_View_Record (int Student_ID)   // Function of (View_student_record) in [list.h] will print the record after pass id of student
+void Student_View_Record (int Student_ID)
 {
-    View_student_record(Student_ID);        // if the function will print inside it
+    List_viewRecord( NULL, StudentId);
 }
 
 
-char Student_Edit_Name(char* Student_Edit_Name[])
+void Student_Edit_Name(void)
 {
+    char *StudentName = (char*) malloc(strlen(StuName)+1);
     printf("Please Enter your name : ");
-    gets(Student_Edit_Name);
-    // Function To Edit Student Name isn't valid Now
+    fgets(StudentName , MAX_NAME_LENGTH , stdin);
+    StudentName[strcspn(StudentName, "\n")] = '\0';
+    strncpy(StuName , StudentName , MAX_NAME_LENGTH);
+    // LS_Edit_Name (StudentId , StudentName);
+    Motion();
+    printf("Your Name is Modified Successfully \n");
 }
 
 
-char Student_Edit_Paasword(char* Student_Edit_Paasword)
+void Student_Edit_Paasword(void)
 {
-    int pass = 0;
+    char *StudentPassword = (char*) malloc(strlen(StuPassword)+1);
     printf("Enter your New Password : ");
-    scanf("%c",pass);
-// Function To Edit Student Name isn't valid Now
+    fgets(StudentPassword, MAX_PASSWORD_LENGTH , stdin);
+    StudentPassword[strcspn(StudentPassword, "\n")] = '\0';
+    strncpy(StuPassword , StudentPassword , MAX_PASSWORD_LENGTH);
+    // LS_Edit_Password (StudentId , StudentPassword);
     Motion();
     printf("Your Password is Modified Successfully \n");
 }
 
 
-void Motion (void)
+void Motion(void)
 {
     printf("Please wait ");
     for(int UserPassIndex = 0; UserPassIndex < 15; UserPassIndex++)
