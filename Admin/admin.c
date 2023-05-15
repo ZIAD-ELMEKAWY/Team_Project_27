@@ -9,8 +9,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 #include "./List/List.h"
 #include "admin.h"
+#include "./Student/Student.h"
 
 #define MAX_PASSWORD_LENGTH 30
 #define MAX_PASSWORD_ATTEMPTS 3
@@ -49,6 +51,7 @@ void Edit_Admin_Password()
     fgets(newPassword, sizeof(newPassword), stdin);
     newPassword[strcspn(newPassword, "\n")] = '\0'; // Remove trailing newline
     strncpy(AdminPassword, newPassword, MAX_PASSWORD_LENGTH);
+    Motion();
     printf("Admin password updated successfully.\n");
 }
 
@@ -86,7 +89,7 @@ void Add_Student_Record()
     student_password[strcspn(student_password, "\n")] = '\0'; // Remove trailing newline
 
     Add_student_record(studunt_name, total_grade, student_ID, student_age, gender, student_password);
-
+    Motion();
     printf("Student record added successfully.\n");
 }
 void Remove_Student_Record()
@@ -97,6 +100,8 @@ void Remove_Student_Record()
     getchar(); // Consume newline character
 
     delete_Record(studentId);
+    Motion();
+    printf("Student record with id %d deleted successfully.\n",studentId);
 }
 void View_Student_Record()
 {
@@ -104,10 +109,12 @@ void View_Student_Record()
     printf("Enter student ID to view: ");
     scanf("%d", &studentId);
     getchar(); // Consume newline character
-    display_Syudent_Record(studentId);
+    Motion();
+    display_Student_Record(studentId);
 }
 void View_All_Records()
 {
+    Motion();
     displayAllRecord();
 }
 void Edit_Student_Grade()
@@ -122,4 +129,6 @@ void Edit_Student_Grade()
     getchar(); // Consume newline character
 
     editStudentGradeById(studentId, newGrade);
+    Motion();
+    printf("New Grade for student with id %d is update successfully.\n",studentId);
 }
