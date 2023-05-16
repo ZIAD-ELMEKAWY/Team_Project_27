@@ -12,6 +12,8 @@
 * @Author   Ziad_Elmekawy
 **/
 
+struct n* start = NULL ;
+int StudentId = 1234 ;
 
 
 int main()
@@ -51,22 +53,22 @@ int main()
             switch (adminChoice)
             {
             case 1:
-                addStudentRecord();
+                Add_Student_Record();
                 break;
             case 2:
-                removeStudentRecord();
+                Remove_Student_Record();
                 break;
             case 3:
-                viewStudentRecord();
+                View_Student_Record();
                 break;
             case 4:
-                viewAllRecords();
+                View_All_Records();
                 break;
             case 5:
-                editAdminPassword();
+                Edit_Admin_Password();
                 break;
             case 6:
-                editStudentGrade();
+                Edit_Student_Grade();
                 break;
             default:
                 printf("Invalid option. Exiting admin mode...\n");
@@ -105,7 +107,7 @@ int main()
                 Student_Edit_Name();
                 break;
             case 3:
-                Student_Edit_Passowrd();
+                Student_Edit_Paasword();
                 break;
             case 4:
                 main();
