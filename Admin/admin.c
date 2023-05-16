@@ -88,7 +88,7 @@ void Add_Student_Record()
     fgets(student_password, sizeof(student_password), stdin);
     student_password[strcspn(student_password, "\n")] = '\0'; // Remove trailing newline
 
-    Add_student_record(studunt_name, total_grade, student_ID, student_age, gender, student_password);
+    start=List_Add_student_record(start,studunt_name, total_grade, student_ID, student_age, gender, student_password);
     Motion();
     printf("Student record added successfully.\n");
 }
@@ -99,7 +99,7 @@ void Remove_Student_Record()
     scanf("%d", &studentId);
     getchar(); // Consume newline character
 
-    delete_Record(studentId);
+    start=List_DeleteRecord(start,studentId);
     Motion();
     printf("Student record with id %d deleted successfully.\n",studentId);
 }
@@ -110,12 +110,12 @@ void View_Student_Record()
     scanf("%d", &studentId);
     getchar(); // Consume newline character
     Motion();
-    display_Student_Record(studentId);
+    List_viewRecord(start,studentId);
 }
 void View_All_Records()
 {
     Motion();
-    displayAllRecord();
+    view_all_records(start);
 }
 void Edit_Student_Grade()
 {
@@ -128,7 +128,7 @@ void Edit_Student_Grade()
     scanf("%d", &newGrade);
     getchar(); // Consume newline character
 
-    editStudentGradeById(studentId, newGrade);
+    List_editStudent_grade(start,studentId, newGrade);
     Motion();
     printf("New Grade for student with id %d is update successfully.\n",studentId);
 }
