@@ -187,5 +187,28 @@ if(count==r){
 
 
 		}
+/*********************************************************************************************/
 
+void List_editStudent_grade(struct n* start,int id,int newGrade)
+{
+    int count=0;
+	struct n* ptr = start;
+
+while(ptr!=NULL){
+	if(ptr->student_ID==id)
+	{
+ptr->total_grade=newGrade;
+
+	}
+else
+    ++count;
+
+		ptr = ptr->link;}
+		int r=List_GetUsedSize(start);
+if(count==r){
+    printf("enter correct ID\n");
+}
+
+
+		}
 

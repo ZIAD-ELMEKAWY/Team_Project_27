@@ -22,4 +22,5 @@ void view_all_records(struct n* start);
 struct n* List_isIDExist(struct n* start,int id, char password []);
 void List_editStudent_password(struct n* start,char OldPass[],char newPass[]);
 void List_editStudent_name(struct n* start,int id,char newName[]);
+void List_editStudent_grade(struct n* start,int id,int newGrade);
 #endif
