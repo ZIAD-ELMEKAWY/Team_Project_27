@@ -71,7 +71,12 @@ void Add_Student_Record()
     printf("Enter total grade: ");
     scanf("%d", &total_grade);
     getchar(); // Consume newline character
-
+    while(total_grade>100){
+    printf("please enter grade less than or equal 100 \n");
+        printf("Enter new grade: ");
+        scanf("%d", &total_grade);
+        getchar(); // Consume newline character
+    }
     printf("Enter unique ID: ");
     scanf("%d", &student_ID);
     getchar(); // Consume newline character
@@ -80,7 +85,7 @@ void Add_Student_Record()
     scanf("%d", &student_age);
     getchar(); // Consume newline character
 
-    printf("Enter gender (M/F): ");
+    printf("Enter gender (Male/Female): ");
     fgets(gender, sizeof(gender), stdin);
     gender[strcspn(gender, "\n")] = '\0';
 
