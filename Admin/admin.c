@@ -127,12 +127,13 @@ void Edit_Student_Grade()
     printf("Enter new grade: ");
     scanf("%d", &newGrade);
     getchar(); // Consume newline character
-    if (newGrade<100){
-    List_editStudent_grade(start,studentId, newGrade);
-    Motion();}
-    else{
-        printf("please enter grade again\n ");
-        Edit_Student_Grade();
+    while(newGrade>100){
+    printf("please enter grade less than or equal 100 \n");
+        printf("Enter new grade: ");
+        scanf("%d", &newGrade);
+        getchar(); // Consume newline character
     }
+    List_editStudent_grade(start,studentId, newGrade);
+    Motion();
     printf("New Grade for student with id %d is update successfully.\n",studentId);
 }
