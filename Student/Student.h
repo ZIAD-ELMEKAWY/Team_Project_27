@@ -15,11 +15,10 @@
 int StudentId ;
 
 
-
-int  Student_Login_Check   (void);  // To check Student Login
-void Student_View_Record   (int Student_ID);               // To view Student Record
-void Student_Edit_Name     (void) ;    // Edit student Name
-void Student_Edit_Paasword (void);   // Edit student passowrd
+int  Student_Login_Check  (struct n* start);  // To check Student Login
+void Student_View_Record   ( struct n* start , int Student_ID);         // To view Student Record
+void Student_Edit_Name     (struct n* start) ;             // Edit student Name
+void Student_Edit_Paasword (struct n* start) ;   // Edit student passowrd
 void Motion (void);              // For motion not more ^_^
 
 #endif
