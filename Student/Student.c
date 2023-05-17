@@ -20,67 +20,68 @@ static char StuPassword[MAX_PASSWORD_LENGTH] = "1234";        // for edit name f
 static char StuName[MAX_PASSWORD_LENGTH] = "Ziad Elmekawy" ;  // for edit name function
 static char StuPass[MAX_PASSWORD_LENGTH] = "abc123" ;  // for student login function
 static char loginPassword[MAX_PASSWORD_LENGTH] = "1234";
-int Student_Id = 1234 ;
+static int Student_Id = 1234 ;
 
-int  Student_Login_Check(void)
+int  Student_Login_Check(struct n* start)
 {
     int status =0;
     int attempts = 0;
-    char *Student_Password = (char*) malloc(strlen(Student_Password)+1);
+    char Student_Password[100];
 
     while (attempts < MAX_PASSWORD_ATTEMPTS)
     {
-        printf("Enter your Password: ");
-        fgets(Student_Password , MAX_PASSWORD_LENGTH , stdin);
-        Student_Password[strcspn(Student_Password, "\n")] = '\0';
-
-        printf("Enter your ID : ");
-        scanf ("%d", &Student_Id);
-
-        if ( List_isIDExist(start,Student_Id, Student_Password ) == 1 )
+        printf("enter id and password\n");
+        scanf("%d",&Student_Id);
+        _flushall();
+        scanf("%s",Student_Password);
+        if (List_isIDExist(start,Student_Id,Student_Password)==1)
         {
-            status = 1;
-            break;
+            status= 1 ;
+            break ;
         }
         else
         {
-            printf("Invalid password. %d attempts remaining.\n", MAX_PASSWORD_ATTEMPTS - attempts - 1);
-            attempts++;
+            printf("not exsist\n");
+            attempts++ ;
         }
-        free(Student_Password);
-        Student_Password = NULL ;
+
     }
     return status ;
 }
 
 
-void Student_View_Record (int Student_ID)
+void Student_View_Record   ( struct n* start , int Student_ID)
 {
+    printf("enter id you want to check");
+    scanf("%d",&Student_ID);
     List_viewRecord( start, Student_Id);
 }
 
 
-void Student_Edit_Name(void)
+void Student_Edit_Name (struct n* start)
 {
-    char *StudentName = (char*) malloc(strlen(StuName)+1);
-    printf("Please Enter your name : ");
-    fgets(StudentName , MAX_NAME_LENGTH , stdin);
-    StudentName[strcspn(StudentName, "\n")] = '\0';
-    strncpy(StuName , StudentName , MAX_NAME_LENGTH);
-    List_editStudent_name(start , Student_Id , StudentName);
+    char StudentNewName[100];
+    printf("enter id : ");
+    scanf("%d",&Student_Id);
+    printf("enter new Name: ");
+    _flushall();
+    gets(StudentNewName);
+    List_editStudent_name(start , Student_Id , StudentNewName);
     Motion();
     printf("Your Name is Modified Successfully \n");
 }
 
 
-void Student_Edit_Paasword(void)
+void Student_Edit_Paasword(struct n* start)
 {
-    char *StudentPassword = (char*) malloc(strlen(StuPassword)+1);
-    printf("Enter your New Password : ");
-    fgets(StudentPassword, MAX_PASSWORD_LENGTH , stdin);
-    StudentPassword[strcspn(StudentPassword, "\n")] = '\0';
-    strncpy(StuPassword , StudentPassword , MAX_PASSWORD_LENGTH);
-    List_editStudent_password(start , StuPassword  , StudentPassword);
+    char StudentOldPass [100], StudentNewPass[100];
+    printf("enter old pass ");
+    _flushall();
+    gets(StudentOldPass);
+    printf("enter new ");
+    _flushall();
+    gets(StudentNewPass);
+    List_editStudent_password( start , StudentOldPass , StudentNewPass);
     Motion();
     printf("Your Password is Modified Successfully \n");
 }
