@@ -10,9 +10,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-#include "./List/List.h"
+#include "List.h"
 #include "admin.h"
-#include "./Student/Student.h"
+#include "Student.h"
 
 #define MAX_PASSWORD_LENGTH 30
 #define MAX_PASSWORD_ATTEMPTS 3
@@ -24,27 +24,29 @@ int Validate_Admin_Password()
     char adminPassword[MAX_PASSWORD_LENGTH];
     int attempts = 0;
 
-    while (attempts < MAX_PASSWORD_ATTEMPTS)
+    do
     {
         printf("Enter admin password: ");
-        fgets(adminPassword, sizeof(adminPassword), stdin);
-        adminPassword[strcspn(adminPassword, "\n")] = '\0'; // Remove trailing newline
+        scanf("%s",adminPassword);
+//        fgets(adminPassword, sizeof(adminPassword), stdin);
+//        adminPassword[strcspn(adminPassword, "\n")] = '\0'; // Remove trailing newline
 
         if (strcmp(adminPassword, AdminPassword) == 0)
         {
             return 1; // Password is correct
+            break;
         }
         else
         {
             printf("Invalid password. %d attempts remaining.\n", MAX_PASSWORD_ATTEMPTS - attempts - 1);
             attempts++;
         }
-    }
+    }while (attempts < MAX_PASSWORD_ATTEMPTS);
 
     return 0; // Password is incorrect or maximum attempts reached
 }
 
-void Edit_Admin_Password()
+void Edit_Admin_Password(struct n* start)
 {
     char newPassword[MAX_PASSWORD_LENGTH];
     printf("Enter new admin password: ");
@@ -55,49 +57,45 @@ void Edit_Admin_Password()
     printf("Admin password updated successfully.\n");
 }
 
-void Add_Student_Record()
+struct n* Add_Student_Record(struct n* start)
 {
-    char *studunt_name;
+    char studunt_name[500];
     int total_grade;
     int student_ID;
     int student_age;
-    char *gender;
-    char *student_password;
+    char gender[10];
+    char student_password[500];
+    int grade;
 
     printf("Enter student name: ");
-    fgets(studunt_name, sizeof(studunt_name), stdin);
-    studunt_name[strcspn(studunt_name, "\n")] = '\0'; // Remove trailing newline
+    _flushall();
+    gets(studunt_name);
 
     printf("Enter total grade: ");
     scanf("%d", &total_grade);
-    getchar(); // Consume newline character
-    while(total_grade>100){
+
     printf("please enter grade less than or equal 100 \n");
-        printf("Enter new grade: ");
-        scanf("%d", &total_grade);
-        getchar(); // Consume newline character
-    }
+    printf("Enter new grade: ");
+    scanf("%d",&grade);
+
     printf("Enter unique ID: ");
     scanf("%d", &student_ID);
-    getchar(); // Consume newline character
 
     printf("Enter age: ");
     scanf("%d", &student_age);
-    getchar(); // Consume newline character
 
     printf("Enter gender (Male/Female): ");
-    fgets(gender, sizeof(gender), stdin);
-    gender[strcspn(gender, "\n")] = '\0';
+    scanf("%s",&gender);
 
     printf("Enter password: ");
-    fgets(student_password, sizeof(student_password), stdin);
-    student_password[strcspn(student_password, "\n")] = '\0'; // Remove trailing newline
+    scanf("%s",&student_password);
 
-    start=List_Add_student_record(start,studunt_name, total_grade, student_ID, student_age, gender, student_password);
+    start = List_Add_student_record(start,studunt_name, total_grade, student_ID, student_age, gender, student_password);
+    return start ;
     Motion();
     printf("Student record added successfully.\n");
 }
-void Remove_Student_Record()
+void Remove_Student_Record(struct n* start)
 {
     int studentId;
     printf("Enter student ID to remove: ");
@@ -108,7 +106,7 @@ void Remove_Student_Record()
     Motion();
     printf("Student record with id %d deleted successfully.\n",studentId);
 }
-void View_Student_Record()
+void View_Student_Record(struct n* start)
 {
     int studentId;
     printf("Enter student ID to view: ");
@@ -117,12 +115,12 @@ void View_Student_Record()
     Motion();
     List_viewRecord(start,studentId);
 }
-void View_All_Records()
+void View_All_Records(struct n* start)
 {
     Motion();
     view_all_records(start);
 }
-void Edit_Student_Grade()
+void Edit_Student_Grade(struct n* start)
 {
     int studentId, newGrade;
     printf("Enter student ID: ");
