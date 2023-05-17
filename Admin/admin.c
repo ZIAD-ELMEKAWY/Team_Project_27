@@ -1,6 +1,6 @@
 /**
  * @file     Admin.c
- * @version  20.00
+ * @version  20.01
  * @brief    Admin Module
  * @details  This file contains the Admin module Source code
  * @Author   Abdelrhman_Ellawendi
@@ -27,9 +27,8 @@ int Validate_Admin_Password()
     do
     {
         printf("Enter admin password: ");
-        scanf("%s",adminPassword);
-//        fgets(adminPassword, sizeof(adminPassword), stdin);
-//        adminPassword[strcspn(adminPassword, "\n")] = '\0'; // Remove trailing newline
+        fgets(adminPassword, sizeof(adminPassword), stdin);
+        adminPassword[strcspn(adminPassword, "\n")] = '\0'; // Remove trailing newline
 
         if (strcmp(adminPassword, AdminPassword) == 0)
         {
@@ -46,7 +45,7 @@ int Validate_Admin_Password()
     return 0; // Password is incorrect or maximum attempts reached
 }
 
-void Edit_Admin_Password(struct n* start)
+void Edit_Admin_Password()
 {
     char newPassword[MAX_PASSWORD_LENGTH];
     printf("Enter new admin password: ");
@@ -65,7 +64,6 @@ struct n* Add_Student_Record(struct n* start)
     int student_age;
     char gender[10];
     char student_password[500];
-    int grade;
 
     printf("Enter student name: ");
     _flushall();
@@ -73,11 +71,12 @@ struct n* Add_Student_Record(struct n* start)
 
     printf("Enter total grade: ");
     scanf("%d", &total_grade);
-
+    while(total_grade>100){
     printf("please enter grade less than or equal 100 \n");
-    printf("Enter new grade: ");
-    scanf("%d",&grade);
-
+        printf("Enter new grade: ");
+        scanf("%d", &total_grade);
+        getchar(); // Consume newline character
+    }
     printf("Enter unique ID: ");
     scanf("%d", &student_ID);
 
@@ -85,15 +84,16 @@ struct n* Add_Student_Record(struct n* start)
     scanf("%d", &student_age);
 
     printf("Enter gender (Male/Female): ");
-    scanf("%s",&gender);
+    _flushall();
+    gets(gender);
 
     printf("Enter password: ");
-    scanf("%s",&student_password);
-
+    _flushall();
+    gets(student_password);
     start = List_Add_student_record(start,studunt_name, total_grade, student_ID, student_age, gender, student_password);
-    return start ;
     Motion();
     printf("Student record added successfully.\n");
+        return start ;
 }
 void Remove_Student_Record(struct n* start)
 {
@@ -102,7 +102,7 @@ void Remove_Student_Record(struct n* start)
     scanf("%d", &studentId);
     getchar(); // Consume newline character
 
-    start=List_DeleteRecord(start,studentId);
+    start = List_DeleteRecord(start,studentId);
     Motion();
     printf("Student record with id %d deleted successfully.\n",studentId);
 }
