@@ -13,40 +13,50 @@
 * @Author   Ziad_Elmekawy
 **/
 
-static char StuPassword[MAX_PASSWORD_LENGTH] = "1234";        // for edit name function
-static char StuName[MAX_PASSWORD_LENGTH] = "Ziad Elmekawy" ;  // for edit password function
-static char StuPass[MAX_PASSWORD_LENGTH] = "abc123" ;  // for student login function
+#define MAX_PASSWORD_LENGTH 30
+#define MAX_PASSWORD_ATTEMPTS 3
 
+static char StuPassword[MAX_PASSWORD_LENGTH] = "1234";        // for edit name function
+static char StuName[MAX_PASSWORD_LENGTH] = "Ziad Elmekawy" ;  // for edit name function
+static char StuPass[MAX_PASSWORD_LENGTH] = "abc123" ;  // for student login function
+static char loginPassword[MAX_PASSWORD_LENGTH] = "1234";
+int Student_Id = 1234 ;
 
 int  Student_Login_Check(void)
 {
-    char *Student_Password = (char*) malloc(strlen(StuPass)+1);
     int status =0;
+    int attempts = 0;
+    char *Student_Password = (char*) malloc(strlen(Student_Password)+1);
 
-    printf("Enter your ID : ");
-    scanf ("%d", &StudentId);
-    printf("Enter your Password: ");
-    fgets(Student_Password, MAX_PASSWORD_LENGTH , stdin);
-    Student_Password[strcspn(Student_Password, "\n")] = '\0';
-    strncpy(StuPass , Student_Password , MAX_PASSWORD_LENGTH);
-
-
-    if ( List_isIDExist(start ,StudentId , Student_Password ) == 1 )
+    while (attempts < MAX_PASSWORD_ATTEMPTS)
     {
-        status = 1;
-    }
-    else
-    {
-        status = 0;
-    }
+        printf("Enter your Password: ");
+        fgets(Student_Password , MAX_PASSWORD_LENGTH , stdin);
+        Student_Password[strcspn(Student_Password, "\n")] = '\0';
 
+        printf("Enter your ID : ");
+        scanf ("%d", &Student_Id);
+
+        if ( List_isIDExist(start,Student_Id, Student_Password ) == 1 )
+        {
+            status = 1;
+            break;
+        }
+        else
+        {
+            printf("Invalid password. %d attempts remaining.\n", MAX_PASSWORD_ATTEMPTS - attempts - 1);
+            attempts++;
+        }
+        free(Student_Password);
+        Student_Password = NULL ;
+    }
     return status ;
 }
 
 
 void Student_View_Record (int Student_ID)
 {
-    List_viewRecord( start, StudentId);
+    List_viewRecord( start, Student_Id);
 }
 
 
@@ -57,7 +67,7 @@ void Student_Edit_Name(void)
     fgets(StudentName , MAX_NAME_LENGTH , stdin);
     StudentName[strcspn(StudentName, "\n")] = '\0';
     strncpy(StuName , StudentName , MAX_NAME_LENGTH);
-    List_editStudent_name(start , StudentId , StudentName);
+    List_editStudent_name(start , Student_Id , StudentName);
     Motion();
     printf("Your Name is Modified Successfully \n");
 }
