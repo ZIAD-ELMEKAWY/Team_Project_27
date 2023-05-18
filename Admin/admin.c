@@ -11,7 +11,7 @@
 #include <string.h>
 #include <windows.h>
 #include "List.h"
-#include "Admin.h"
+#include "admin.h"
 #include "Student.h"
 
 #define MAX_PASSWORD_LENGTH 30
