@@ -23,8 +23,8 @@ int main()
 
     do
     {
-        printf("Student Record System\n");
-        printf("0. Finish the program \n");
+        printf("*********Student Record System*********\n");
+        printf("\n0. Finish the program \n");
         printf("1. Admin Mode\n");
         printf("2. Student Mode\n");
         printf("Choose a mode (1-2): ");
@@ -143,7 +143,7 @@ int main()
         }
     }
     while(modeChoice != 0);
-    printf("Thank you ..... ");
+    printf("\n ..... Thank you ..... \n");
     return 0;
 
 }
