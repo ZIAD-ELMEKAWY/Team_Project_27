@@ -19,8 +19,9 @@ struct n* List_DeleteRecord(struct n * start, int ID);
 void List_viewRecord(struct n* start,int ID);
 int List_GetUsedSize(struct n* start);
 void view_all_records(struct n* start);
-struct n* List_isIDExist(struct n* start,int id, char password []);
+struct n* List_check_logIn(struct n* start,int id, char password []);
 void List_editStudent_password(struct n* start,char OldPass[],char newPass[]);
 void List_editStudent_name(struct n* start,int id,char newName[]);
 void List_editStudent_grade(struct n* start,int id,int newGrade);
+struct n* List_isIdExist(struct n* start,int id);
 #endif

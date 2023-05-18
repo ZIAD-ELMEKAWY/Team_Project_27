@@ -80,6 +80,12 @@ while(choose!=0);
         scanf("%d",&grade);
         printf("enter id\n");
         scanf("%d",&id);
+        while(List_isIdExist(start,id)==1)
+        {
+            printf("this ID exist ,please enter another\n");
+            scanf("%d",&id);
+        }
+
         printf("enter age\n");
         scanf("%d",&age);
         printf("enter gender\n");
@@ -98,7 +104,7 @@ while(choose!=0);
         scanf("%d",&id);
         _flushall();
         scanf("%s",password);
-        if (List_isIDExist(start,id,password)==1)
+        if (List_check_logIn(start,id,password)==1)
             printf("OK!\n");
         else
             printf("not exsist\n");

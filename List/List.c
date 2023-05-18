@@ -120,7 +120,7 @@ void view_all_records(struct n* start)
     }
 }
 /*********************************************************************************************/
-struct n* List_isIDExist(struct n* start,int id, char password [])
+struct n* List_check_logIn(struct n* start,int id, char password [])
 {
 
 int count=0;
@@ -211,4 +211,21 @@ if(count==r){
 
 
 		}
+/*********************************************************************************************/
 
+struct n* List_isIdExist(struct n* start,int id)
+{
+
+int count=0;
+struct n* ptr = start;
+while(ptr!=NULL){
+	if(ptr->student_ID==id)
+	{return 1;}
+
+
+else
+    ++count;
+
+		ptr = ptr->link;}
+
+}
