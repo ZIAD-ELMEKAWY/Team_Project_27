@@ -34,7 +34,7 @@ int  Student_Login_Check(struct n* start)
         scanf("%d",&Student_Id);
         _flushall();
         scanf("%s",Student_Password);
-        if (List_isIDExist(start,Student_Id,Student_Password)==1)
+        if (List_check_logIn(start,Student_Id,Student_Password)==1)
         {
             status= 1 ;
             break ;
