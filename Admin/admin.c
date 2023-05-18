@@ -77,9 +77,14 @@ struct n* Add_Student_Record(struct n* start)
         scanf("%d", &total_grade);
         getchar(); // Consume newline character
     }
+
     printf("Enter unique ID: ");
     scanf("%d", &student_ID);
-
+    while (List_isIdExist(start , student_ID) == 1) /*** if the id is eist ***/
+    {
+        printf("This id is exist, Please Enter another ID \n");
+        scanf("%d", &student_ID);
+    }
     printf("Enter age: ");
     scanf("%d", &student_age);
 
