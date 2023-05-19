@@ -1,28 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Admin.h"
+#include "admin.h"
 #include "Student.h"
 #include "List.h"
 
-/**
-* @file     main.c
-* @version  20.03
-* @brief    main Module
-* @details  This file contains the main module Source file.
-* @Author   Ziad_Elmekawy
-**/
+struct n *start = NULL;
+int StudentId = 1234;
 
-struct n* start = NULL ;
-int StudentId = 1234 ;
+void clearScreen()
+{
+    system("cls");
+}
 
+void delay(int milliseconds)
+{
+    usleep(milliseconds * 1000); // usleep takes time in microseconds, so we multiply milliseconds by 1000
+}
 
 int main()
 {
-    int modeChoice;
 
+    int modeChoice;
 
     do
     {
+        delay(2000);
+        clearScreen();
         printf("*********Student Record System*********\n");
         printf("\n0. Finish the program \n");
         printf("1. Admin Mode\n");
@@ -32,15 +35,16 @@ int main()
         scanf("%d", &modeChoice);
         fflush(stdin);
         /**** Mode Choice Start ****/
-        if(modeChoice == 1)         /**** Admin Choice of Mode Choice****/
+        if (modeChoice == 1) /**** Admin Choice of Mode Choice****/
         {
 
             int adminChoice;
-            int ADStaus = 0 ;     /*** For return of Validate_Admin_Password ***/
+            int ADStaus = 0; /*** For return of Validate_Admin_Password ***/
             /**** Admin login check Start***/
             ADStaus = Validate_Admin_Password();
             if (1 == ADStaus)
             {
+                clearScreen();
                 printf("\nAdmin Mode\n");
                 printf("Choose an option (1-6): \n");
                 printf("1. Add student record\n");
@@ -49,6 +53,7 @@ int main()
                 printf("4. View all records\n");
                 printf("5. Edit admin password\n");
                 printf("6. Edit student grade\n");
+                printf("7. Exit this mode\n");
                 fflush(stdin);
                 scanf("%d", &adminChoice);
                 fflush(stdin);
@@ -56,11 +61,12 @@ int main()
                 switch (adminChoice)
                 {
                 case 1:
+                    clearScreen();
                     {
-                        int n=List_GetUsedSize(start);
-                        if (n<10)
+                        int n = List_GetUsedSize(start);
+                        if (n < 10)
                         {
-                            start= Add_Student_Record(start);
+                            start = Add_Student_Record(start);
                             List_GetUsedSize(start);
                         }
                         else
@@ -70,39 +76,52 @@ int main()
                         break;
                     }
                 case 2:
+                    clearScreen();
                     Remove_Student_Record(start);
                     break;
                 case 3:
+                    clearScreen();
                     View_Student_Record(start);
+                    delay(3000);
                     break;
                 case 4:
+                    clearScreen();
                     View_All_Records(start);
+                    delay(3000);
                     break;
                 case 5:
+                    clearScreen();
                     Edit_Admin_Password(start);
                     break;
                 case 6:
+                    clearScreen();
                     Edit_Student_Grade(start);
                     break;
+                case 7:
+                    main();
+                    break;
                 default:
+                    clearScreen();
                     printf("Invalid option. Exiting admin mode...\n");
                     break;
                 }
             }
             else
             {
+                clearScreen();
                 printf("Invalid password. Exiting Admin mode...\n");
             }
             /**** Admin login check End***/
         }
-        else if(modeChoice == 2)    /*** Student Choice of Mode Choice***/
+        else if (modeChoice == 2) /*** Student Choice of Mode Choice***/
         {
 
             int StudentChoice;
 
             /**** Student login check Start***/
-            if ( Student_Login_Check(start) == 1)
+            if (Student_Login_Check(start) == 1)
             {
+                clearScreen();
                 printf("\nStudent Mode\n");
                 printf("Choose an option (1-4): \n");
                 printf("1_ View your record    \n");
@@ -115,12 +134,16 @@ int main()
                 switch (StudentChoice)
                 {
                 case 1:
-                    Student_View_Record(start , StudentId);
+                    clearScreen();
+                    Student_View_Record(start, StudentId);
+                    delay(3000);
                     break;
                 case 2:
+                    clearScreen();
                     Student_Edit_Name(start);
                     break;
                 case 3:
+                    clearScreen();
                     Student_Edit_Paasword(start);
                     break;
                 case 4:
@@ -133,18 +156,17 @@ int main()
             }
             else
             {
+                clearScreen();
                 printf("Invalid Information. Exiting student mode...\n");
             }
             /**** Student login check End***/
         }
-        else                        /*** Invalid Choice of Mode Choice****/
+        else /*** Invalid Choice of Mode Choice****/
         {
+            clearScreen();
             printf("Invalid value, Sorry...\n");
         }
-    }
-    while(modeChoice != 0);
+    } while (modeChoice != 0);
     printf("\n ..... Thank you ..... \n");
     return 0;
-
 }
-
