@@ -1,5 +1,8 @@
 Student Record System
-This is a mini-project called "Student Record System" implemented using the C programming language. The system allows users to manage student records and perform various operations based on their privileges. It supports two modes: Admin mode and User mode.
+
+This is a mini-project called "Student Record System" implemented using the C programming language.
+The system allows users to manage student records and perform various operations based on their privileges.
+It supports two modes: Admin mode and User mode.
 
 System Modes
 Admin mode: In this mode, the user is required to enter the password to access administrative privileges.
@@ -12,6 +15,7 @@ View student record
 View all records
 Edit admin password
 Edit student grade
+
 User mode: In this mode, the user needs to provide their ID and password to access user-specific privileges.
 
 User Privileges:
@@ -20,7 +24,8 @@ View your record
 Edit your password
 Edit your name
 Admin Mode
-Upon selecting admin mode, the system prompts the user for the password. The default password is "1234", and the user has three attempts to enter the correct password.
+Upon selecting admin mode, the system prompts the user for the password. 
+The default password is "1234", and the user has three attempts to enter the correct password.
 
 Add student record:
 
