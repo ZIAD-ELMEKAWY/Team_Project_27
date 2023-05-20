@@ -9,9 +9,9 @@ struct n *Add_Student_Record(struct n *start); // Function to add a student reco
 // Takes the start pointer of the linked list.
 // Returns the updated start pointer.
 
-void Remove_Student_Record(struct n *start); // Function to remove a student record
+struct n * Remove_Student_Record(struct n *start); // Function to remove a student record
 // Takes the start pointer of the linked list.
-// Returns nothing.
+// Returns the updated start pointer.
 
 void View_Student_Record(struct n *start); // Function to view a specific student record
 // Takes the start pointer of the linked list.
