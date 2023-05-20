@@ -101,7 +101,7 @@ struct n *Add_Student_Record(struct n *start)
 
 /*********************************************************************************************/
 
-void Remove_Student_Record(struct n *start)
+struct n *Remove_Student_Record(struct n *start)
 {
     int studentId;
     printf("Enter student ID to remove: ");
@@ -110,6 +110,7 @@ void Remove_Student_Record(struct n *start)
     start = List_DeleteRecord(start, studentId);
     Motion();
     printf("Student record with id %d deleted successfully.\n", studentId);
+    return start;
 }
 
 /*********************************************************************************************/
